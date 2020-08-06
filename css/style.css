@@ -1,0 +1,9 @@
+.row {
+    height: 3rem;
+    width: 30rem;
+}
+.cell {
+    height:100%;
+    width: 10%;
+    background-color: blue;
+}
