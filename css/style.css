@@ -1,6 +1,7 @@
 
 body{
     background-color: black;
+    text-shadow: #464646 0 0 10px;
 }
 #container {
     width: 90rem;
@@ -98,7 +99,7 @@ body{
 }
 
 
-.difficulty-container p:last-child{
+.difficulty-container p:nth-child(2){
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -114,6 +115,33 @@ body{
 
 #difficulty {
     text-decoration: none;
+}
+
+#size-container {
+    width: 100%;
+    display: flex;
+    margin: 10px auto;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#size-input{
+    width: 30%;
+    margin-left: 10px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    text-align: center;
+}
+
+#size-button {
+    font-family: 'Russo One', sans-serif;
+    color: black;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    border: 1px groove lightblue;
+    transition: 0.4s;
+    text-shadow: #464646 0 0 10px;
 }
 
 .screen-container {
@@ -157,6 +185,18 @@ body{
     height: 10px;
     background-color: white;
     border-right: 1px solid white;
+}
+
+#grid-size-display-container {
+    width: 100%;
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    align-items: center;
+    font-size: 0.7rem;
 }
 
 .rules {
@@ -284,6 +324,7 @@ body{
     color: black;
     height: 1.5rem;
     background-color: yellow;
+    text-shadow: none;
     width: 200%;
     top: 150px;
     left: -100px;
@@ -315,47 +356,47 @@ body{
 .grid {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .row {
-    height: 20%;
-    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: start;
     justify-content: start;
 }
 
 .cell {
     box-sizing: border-box;
     height:100%;
-    width: 20%;
+    width: 100%;
     border-radius: 35%;
-    transition: 0.2s;
+    transition: 0.2;
 }
 
 .cell-easy {
     background: linear-gradient(-200deg, #7deb8b, #24b522);
-    border: 8px outset #b9deb0;
+    border: 0.3rem outset #a1be99;
 }
 .cell-medium {
     background: linear-gradient(-200deg, #7daaeb, royalblue);
-    border: 8px outset lightsteelblue;
+    border: 0.3rem outset lightsteelblue;
 }
 .cell-hard {
     background: linear-gradient(-200deg, #eb7d7d, #b52222);
-    border: 8px outset #deb0b0;
+    border: 0.3rem outset #deb0b0;
 }
 .cell-impossible {
     background: linear-gradient(-200deg, #cac9c9, #464646);
-    border: 8px outset #d0d0d0;
+    border: 0.3rem outset #b9b9b9;
 }
 
 .cell:hover{
-    border: 9px inset;
+    border: 0.3rem inset;
 }
 
 .cell:active{
-    border: 9px inset goldenrod;
+    border: 0.3rem inset goldenrod;
 }
 
 /**=========================Useful for scripts====================**/
@@ -363,7 +404,7 @@ body{
 @keyframes blinker {
     from{
         background: linear-gradient(0deg, gold, goldenrod);
-        border: 8px outset #747474;
+        border: 0.3rem outset #747474;
     }
     10%{
         background: linear-gradient(36deg, gold, goldenrod);
@@ -385,13 +426,13 @@ body{
         background: linear-gradient(324deg, gold, goldenrod);
     }to{
         background: linear-gradient(360deg, gold, goldenrod);
-        border: 8px outset #747474;
+        border: 0.3rem outset #747474;
     }
   }
 
   @keyframes valid {
       10%{
-          border:10px outset white;
+          border:0.3rem outset white;
           background: #006d6d;
       }
   }
@@ -412,7 +453,7 @@ body{
 #options li {
     list-style-type: none;
     margin: auto;
-    padding:2px 0;
+    padding: 2px 0;
     cursor: pointer;
 }
 
@@ -436,6 +477,18 @@ body{
 }
 .target-valid {
     animation: valid 0.5s linear ;
+}
+
+.target-crack {
+    background-image: url('../image/crack.png');
+    background-size: cover ;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    height:100%;
+    width: 100%;
+    border-radius: 35%;
+    transition: 0s;
 }
 
 /* target background
