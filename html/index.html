@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <title>Tap tap Game</title>
+    <link rel="shortcut icon" href=" ">
+    <script src="https://kit.fontawesome.com/fb034f5d7d.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <section id="container">
+        <div class="infos">
+            <div class="difficulty-container">
+                <p id="difficulty-choice"><span><i class="fas fa-chevron-right"></i></span> Difficulty</p>
+                <p id="difficulty-display" class="dif-medium">Medium</p>
+                
+            </div>
+            <div class="screen-container">
+                <i class="fas fa-tv"></i>
+                <div class="screen">
+                    <p>
+                        <div id="myProgress">
+                            <div id="myBar"></div>
+                            </div>
+                        </div>  
+                    </p>
+                </div>
+            <div class="rules-container">
+                <div class="rules">
+                    <p>Rules are simple :</p>
+                    <hr>
+                    <p>Some cells will turn into another color.</p>
+                    <p>You have to click on them as fast as you can.</p>
+                    <p>Earn points by doing so and score high !</p>
+                    <p>Select a difficulty and click on Start button below.</p>
+                </div>
+                <button id="start-button">Start!</button>
+            </div>
+        </div>
+        <section id="grid-container">
+            <div class="grid">
+            </div>
+        </section>
+        <div class="scores">
+            <div class="your-score">
+                <span class="score-title">Your score</span>
+                <p id="score-display">0</p>
+            </div>
+            <div class="top-scores">
+                    <div class="police-band">Warning! Warning! Warning!</div>
+                    <div class="police-band police-band-reverse">Warning! Warning! Warning!</div>
+                    <p>Top scores WIP</p>
+                    <hr>
+                    <p><span>Alice</span><span>3000</span></p>
+                    <p><span>Jean</span><span>268495</span></p>
+
+            </div>
+        </div>
+    </section>
+    
+    <script src='../js/script.js' ></script>
+</body>
+</html>
