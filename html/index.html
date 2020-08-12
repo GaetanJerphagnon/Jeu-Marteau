@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
     <title>Tap tap Game</title>
-    <link rel="shortcut icon" href=" ">
+    <link rel="icon" href="https://img.icons8.com/ultraviolet/80/000000/triforce.png">
     <script src="https://kit.fontawesome.com/fb034f5d7d.js" crossorigin="anonymous"></script>
 
 </head>
@@ -17,7 +17,6 @@
             <div class="difficulty-container">
                 <p id="difficulty-choice"><span><i class="fas fa-chevron-right"></i></span> Difficulty</p>
                 <p id="difficulty-display" class="dif-medium">Medium</p>
-                <form id="size-container"><button id="size-button">Choose grid size</button><input type="int" id="size-input" placeholder="1> ... >20"></form>
 
             </div>
             <div class="screen-container">
@@ -29,7 +28,8 @@
                         </div>
                     </p>
                 </div>
-                <div id="grid-size-display-container"><p id="grid-size-display"></p></div>
+                <div class="secret-options-display-container"><p id="grid-size-display"></p><p id="occurence-display"></p></div>
+
                 </div>
             <div class="rules-container">
                 <div class="rules">
@@ -48,19 +48,29 @@
             <div class="grid">
             </div>
         </section>
-        <div class="scores">
-            <div class="your-score">
-                <span class="score-title">Your score</span>
-                <p id="score-display">0</p>
+        <div id="scores-container">
+            <div id="secret-commands">
+                <p>You found some secret commands!</p>
+                <p>You will not be able to save your scores using those</p>
+                <form id="size-container"><button class="secret-option">Choose grid size</button><input type="int" id="size-input" class="secret-inputs" placeholder="1> ... >20"></form>
+                <form id="occurence-container"><button class="secret-option">Choose occurences</button><input type="int" id="occurence-input" class="secret-inputs" placeholder="1> ... >50"></form>
+
             </div>
-            <div class="top-scores">
+            <div class="scores">
+                <div id="secret"></div>
+                <div class="your-score">
+                    <span class="score-title">Your score</span>
+                    <p id="score-display">0</p>
+                </div>
+                <div class="top-scores">
                     <div class="police-band">Warning! Warning! Warning!</div>
                     <div class="police-band police-band-reverse">Warning! Warning! Warning!</div>
                     <p>Top scores WIP</p>
                     <hr>
                     <p><span>Alice</span><span>3000</span></p>
                     <p><span>Jean</span><span>268495</span></p>
-
+                    
+                </div>
             </div>
         </div>
     </section>

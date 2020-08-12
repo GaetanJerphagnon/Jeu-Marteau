@@ -11,23 +11,30 @@ let game = {
     },
     bonusCountdown: 0,
     bonusPoint: 1,
+    secret: document.getElementById("secret"),
     grid : document.querySelector('#grid-container .grid'),
     startButton : document.getElementById('start-button'),
     sizeForm : document.getElementById("size-container"),
+    occurenceForm : document.getElementById("occurence-container"),
     difficultyButton : document.getElementById('difficulty-choice'),
+    occurence: 5,
     pointCounter : 0,
+    secretDiscovered: false,
     broken : false,
 
 
     init: function(){
         game.difficultyButton.addEventListener('click', game.chooseDifficultyHandle); 
         game.startButton.addEventListener('click', game.startGame);
-        game.sizeForm.addEventListener('submit', game.changeGridSizeClickHandle);
+        game.sizeForm.addEventListener('submit', game.changeGridSizeSubmitHandle);
+        game.occurenceForm.addEventListener('submit', game.changeOccurenceSubmitHandle);
         game.changeGridSize();
+        game.changeOcurrence();
         game.setDifficulty(game.difficulty);
+        game.secret.addEventListener('click', game.secretClickHandle);
     },
     
-    changeGridSizeClickHandle: async function(event){
+    changeGridSizeSubmitHandle: async function(event){
         event.preventDefault();
         let input = document.getElementById('size-input');
         let number = input.value;
@@ -51,22 +58,87 @@ let game = {
         await sleep(1000);
         input.style.border ='';
         input.setAttribute('placeholder', '1> ... >20');
-        game.sizeForm.addEventListener('submit', game.changeGridSizeClickHandle);
+        game.sizeForm.addEventListener('submit', game.changeGridSizeSubmitHandle);
+    },
+
+    changeOccurenceSubmitHandle: async function(event){
+        event.preventDefault();
+        let input = document.getElementById('occurence-input');
+        let number = input.value;
+        number = parseInt(number);
+        if (number){
+            if (number > 50 || number < 1) {
+                input.style.border ='2px solid red';
+                setTimeout(function(){
+                    input.style.border ="";
+                }, 1000);
+                input.value = '';
+                if(number > 50){
+                    input.setAttribute('placeholder', 'Max 50!');
+                } else if (number < 1){
+                    input.setAttribute('placeholder', 'Min 1...');
+                }
+            } else {
+                input.value = '';
+                game.changeOcurrence(number);
+            }
+        }
+        input.value = '';
+        input.setAttribute('placeholder', '1> ... >50');
+        game.sizeForm.addEventListener('submit', game.changeOccurenceSubmitHandle);
     },
     
-    changeGridSize: function (number=10){
+    changeGridSize: function (number = 10){
         while (game.grid.lastElementChild) {
             game.grid.removeChild(game.grid.lastElementChild);
         };
         game.displayGridSize(number);
         game.generateCells(number);
     },
+
+    changeOcurrence: function(number = 15) {
+        game.occurence = number;
+        game.displayOccurence();
+
+    },
     
     displayGridSize: function(number){
         let sizeDisplay = document.getElementById('grid-size-display');
         sizeDisplay.textContent= number+'x'+number;
     },
+
+    displayOccurence: function(){
+        let occurenceDisplay = document.getElementById('occurence-display');
+        occurenceDisplay.textContent= game.occurence+"x";
+    },
+
+    secretClickHandle: function(event) {
+        let scores = document.querySelector(".scores");
+        if (scores.classList.contains("move-score-panel-down")) {
+            game.moveScorePanelUp();
+        } else {
+            if (game.secretDiscovered===false){
+                let audio = new Audio('http://noproblo.dayjo.org/ZeldaSounds/WW_New/WW_Secret.wav');
+                audio.volume = 0.2;
+                audio.play();
+                game.secretDiscovered = true;
+            }
+            game.moveScorePanelDown();
+        }
+    },
     
+    moveScorePanelDown: function(event) {
+        let scores = document.querySelector(".scores");
+        scores.classList.add("move-score-panel-down");
+        game.secret.classList.add("secret-active");
+    },
+    moveScorePanelUp: function(event) {
+        let scores = document.querySelector(".scores");
+        scores.classList.remove("move-score-panel-down");
+        game.secret.classList.remove("secret-active");
+
+    },
+
     generateCells: function(number=5){
         for (let i=0; i<number ; i++) {
             let row = document.createElement('div');
@@ -106,7 +178,11 @@ let game = {
         infos.classList.add('infos-'+game.difficulty.toLowerCase());
         
         let scores = document.querySelector('.scores');
-        scores.classList = '';
+        if (scores.classList.contains('move-score-panel-down')) {
+            scores.classList = 'move-score-panel-down';
+        } else {
+            scores.classList = '';
+        }
         scores.classList.add('scores');
         scores.classList.add('scores-'+game.difficulty.toLowerCase());
         
@@ -295,7 +371,7 @@ let game = {
         game.difficultyButton.style.backgroundColor ="grey";
         let button = event.currentTarget;
         button.removeEventListener('click', game.startGame);
-        game.sizeForm.removeEventListener('submit', game.changeGridSizeClickHandle)
+        game.sizeForm.removeEventListener('submit', game.changeGridSizeSubmitHandle)
         let buttonColor = button.style.backgroundColor;
         button.style.backgroundColor ="grey";
         
@@ -305,7 +381,7 @@ let game = {
         await sleep(game.difficulties[game.difficulty]["time"]*1.1);
         screen.textContent ='Game in progress...';
         
-        for (let i=0; i<15 ; i++) {
+        for (let i=0; i<game.occurence ; i++) {
             if(game.broken == false){
                 game.getRandomCell();
                 await sleep(game.difficulties[game.difficulty]["time"]);
@@ -316,10 +392,10 @@ let game = {
         for(let i=0 ; i<allCells.length; i++){
             allCells[i].removeEventListener("mousedown", game.missclickHandle);
         }
-        screen.textContent = '';
-        if (game.difficulty === 'Impossible'){screen.textContent = 'Yup. "Impossible"';}
+        screen.textContent = 'Game is over';
+        if (game.difficulty === 'Impossible'){screen.textContent = "Impossible isn't it?";}
         game.difficultyButton.addEventListener('click', game.chooseDifficultyHandle);
-        game.sizeForm.addEventListener('submit', game.changeGridSizeClickHandle)
+        game.sizeForm.addEventListener('submit', game.changeGridSizeSubmitHandle)
         game.difficultyButton.style.backgroundColor = buttonColor;
         button.style.backgroundColor = buttonColor;
         button.addEventListener('click', game.startGame);

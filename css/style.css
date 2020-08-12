@@ -2,6 +2,7 @@
 body{
     background-color: black;
     text-shadow: #464646 0 0 10px;
+    user-select: none;
 }
 #container {
     width: 90rem;
@@ -127,7 +128,13 @@ body{
     text-decoration: none;
 }
 
-#size-container {
+#secret {
+    width: 15px;
+    height: 15px;
+    background-size: cover;
+}
+
+#secret-options-container {
     width: 100%;
     display: flex;
     margin: 10px auto;
@@ -136,15 +143,7 @@ body{
     align-items: center;
 }
 
-#size-input{
-    width: 30%;
-    margin-left: 10px;
-    box-sizing: border-box;
-    border-radius: 15px;
-    text-align: center;
-}
-
-#size-button {
+.secret-option {
     font-family: 'Russo One', sans-serif;
     color: black;
     font-size: 0.8rem;
@@ -154,11 +153,20 @@ body{
     text-shadow: #464646 0 0 10px;
 }
 
+.secret-inputs {
+    width: 30%;
+    margin-left: 10px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    text-align: center;
+}
+
 .screen-container {
     color: lightgrey;
     width: 100%;
     text-align: center;
     position: relative;
+    user-select: none;
 }
 
 .screen-container i {
@@ -196,16 +204,20 @@ body{
     background-color: #fcc10067;
 }
 
-#grid-size-display-container {
+.secret-options-display-container {
     width: 100%;
     position: absolute;
     top: 10px;
-    left: 30px;
     display: flex;
-    justify-content: left;
+    justify-content: space-around;
     flex-direction: row;
     align-items: center;
     font-size: 0.7rem;
+}
+
+#occurence-display{
+    right:0;
+    left:auto;
 }
 
 .rules {
@@ -213,6 +225,7 @@ body{
     background-color: rgba(0, 0, 0, 0.336);
     padding: 10px;
     border-radius: 30px;
+    user-select: none;
 }
 
 #start-button {
@@ -247,17 +260,68 @@ body{
     cursor: pointer;
 }
 
-.scores {
-    border: #cccccc solid 2px;
-    height: 95%;
-    width: 20%;
-    position: absolute;
-    right: 1rem;
+#scores-container {
+    overflow: hidden;
     border-bottom-left-radius: 30%;
     border-top-left-radius: 30%;
+    border: #cccccc solid 2px;
+    width: 20%;
+    height: 95%;
+    position: absolute;
+    right: 1rem;
+    z-index: 2;
+
+    
+}
+
+.scores {
+    height: 100%;
+    width: 100%;
+    position: absolute;
     display: flex;
+    top: 0;
     flex-direction: column;
     justify-content: space-around;
+    transition: 1s;
+}
+
+
+#secret {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 0.5rem;
+    text-shadow: none;
+    color: #ffffff08;
+}
+
+.secret-active {
+    animation: secret-blink 0.5s linear infinite;
+}
+
+#secret-commands {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 149px;
+    top: 0;
+    right: 0;
+    width: 80%;
+    padding-left: 60px;
+    background-color: rgba(0, 0, 0, 0.37);
+    border-bottom: 1px white solid;
+    z-index: 0;
+}
+
+#secret-commands > * {
+    font-size: 0.7rem;
+}
+
+.move-score-panel-down {
+    top: 150px;
+
 }
 
 .scores-easy {
@@ -391,6 +455,7 @@ body{
     justify-content: center;
     align-items: center;
     font-size: 0.5rem;
+    user-select: none;
 
 }
 
@@ -505,6 +570,12 @@ body{
         background: orange;
     }
     
+}
+
+@keyframes secret-blink {
+    50%{
+        background-image: url('https://img.icons8.com/ultraviolet/80/000000/triforce.png');
+    }
 }
 
 
