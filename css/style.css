@@ -28,6 +28,10 @@ body{
     background: linear-gradient(-90deg, #5a22b5,#a77deb,#5a22b5);
 }
 
+.container-extreme{
+    background: linear-gradient(-90deg, #b52222,#eb977d,#b52222);
+}
+
 .container-impossible{
     background: linear-gradient(-90deg, #151515,#737373,#151515);
 }
@@ -56,6 +60,9 @@ body{
 }
 .infos-hard{
     background: linear-gradient(90deg, #5a22b5,#a77deb );
+}
+.infos-extreme{
+    background: linear-gradient(90deg, #b52222,#eb977d );
 }
 .infos-impossible{
     background: linear-gradient(90deg, #4e4e4e,#adadad);
@@ -93,6 +100,9 @@ body{
 }
 .difficulty-container-hard {
     background-color: #6e0101;
+}
+.difficulty-container-extreme {
+    background-color: #b52222;
 }
 .difficulty-container-impossible {
     background-color: #333333;
@@ -214,7 +224,7 @@ body{
     border: 1px groove lightblue;
     width: 50%;
     margin: 10px 25% 0;
-    transition: 1s;
+    transition: 0.2s;
 }
 .start-button-easy {
     background-color: #004705;
@@ -223,7 +233,10 @@ body{
     background-color: #01236e;
 }
 .start-button-hard {
-    background-color: #27016e;
+    background-color: #42016e;
+}
+.start-button-extreme {
+    background-color: #b52222;
 }
 .start-button-impossible {
     background-color: #333333;
@@ -255,6 +268,9 @@ body{
 }
 .scores-hard {
     background: linear-gradient(-90deg, #5a22b5,#a77deb);
+}
+.scores-extreme {
+    background: linear-gradient(-90deg, #b52222,#eb977d);
 }
 .scores-impossible {
     background: linear-gradient(-90deg, #4e4e4e,#adadad);
@@ -405,6 +421,10 @@ body{
     background: linear-gradient(-200deg, #a77deb, #5a22b5);
     border: 0.3rem outset #c8b0de;
 }
+.cell-extreme {
+    background: linear-gradient(-200deg, #eb977d, #b52222);
+    border: 0.3rem outset #f39c81;
+}
 .cell-impossible {
     background: linear-gradient(-200deg, #cac9c9, #464646);
     border: 0.3rem outset #b9b9b9;
@@ -486,6 +506,16 @@ body{
 
   }
 
+  @keyframes alert-extreme {
+      0%{
+    }
+      50%{
+          
+    }
+      100%{
+    }
+  }
+
 #options {
     margin: auto;
     padding: 0 8px 8px;
@@ -521,6 +551,9 @@ body{
 }
 .dif-hard {
     color: purple;
+}
+.dif-extreme {
+    color: brown;
 }
 .dif-impossible {
     color: black;

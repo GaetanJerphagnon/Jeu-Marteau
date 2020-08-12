@@ -1,11 +1,12 @@
 
 let game = {
     
-    difficulty : "Medium",
+    difficulty : "Extreme",
     difficulties : {
         "Easy": {"time" : 2000, "basePoints" : 10},
         "Medium": {"time": 1100, "basePoints" : 35},
         "Hard": {"time": 700, "basePoints" : 60},
+        "Extreme": {"time": 470, "basePoints" : 110},
         "Impossible": {"time": 50, "basePoints" : 1},
     },
     bonusCountdown: 0,
