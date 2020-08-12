@@ -1,12 +1,12 @@
 
 let game = {
     
-    difficulty : "Extreme",
+    difficulty : "Medium",
     difficulties : {
         "Easy": {"time" : 2000, "basePoints" : 10},
         "Medium": {"time": 1100, "basePoints" : 35},
         "Hard": {"time": 700, "basePoints" : 60},
-        "Extreme": {"time": 470, "basePoints" : 110},
+        "Extreme": {"time": 470, "basePoints" : 100},
         "Impossible": {"time": 50, "basePoints" : 1},
     },
     bonusCountdown: 0,
@@ -20,7 +20,6 @@ let game = {
 
 
     init: function(){
-        console.log('Js Chargé')
         game.difficultyButton.addEventListener('click', game.chooseDifficultyHandle); 
         game.startButton.addEventListener('click', game.startGame);
         game.sizeForm.addEventListener('submit', game.changeGridSizeClickHandle);
@@ -241,20 +240,24 @@ let game = {
         game.addPoints(game.difficulties[game.difficulty]['basePoints']+game.bonusPoint);
         if (target.classList.contains("target-impossible")){
             let targetOverlay = document.createElement("div");
+            let container = document.getElementById('container');
             targetOverlay.classList.add("overlay");
-            target.appendChild(targetOverlay);
+            container.appendChild(targetOverlay);
             target.classList.remove("target-impossible");
             target.classList.remove("target-valid");
             target.classList.remove("target");
+            target.classList.remove("cell-missclick");
+            target.classList.remove("cell:hover");
+            target.removeEventListener("mousedown", game.missclickHandle);
             target.style.transition = "0";
-            let posX = event.screenX;
-            let posY = event.clientY;
-            let x = targetOverlay.offsetLeft;
-            let y = targetOverlay.offsetTop;
-            let w = targetOverlay.offsetWidth;
-            let h = targetOverlay.offsetHeight;
-            let bgx = posX-x-w/1.6;
-            let bgy = posY-y-h/1.8;
+           let posX = event.screenX;
+           let posY = event.clientY;
+           let x = targetOverlay.offsetLeft;
+           let y = targetOverlay.offsetTop;
+           let w = targetOverlay.offsetWidth;
+           let h = targetOverlay.offsetHeight;
+           let bgx = posX-x-w/1.7;
+           let bgy = posY-y-h/1.1;
 
             targetOverlay.style.backgroundPosition = bgx+"px "+bgy+"px";
             game.broken = true;
@@ -307,13 +310,14 @@ let game = {
                 game.getRandomCell();
                 await sleep(game.difficulties[game.difficulty]["time"]);
             } else if (game.broken) {
-                return alert('You clicked too hard you broke my game!');
+                return alert('You clicked too hard you broke my game!')
             }
         }
         for(let i=0 ; i<allCells.length; i++){
             allCells[i].removeEventListener("mousedown", game.missclickHandle);
         }
         screen.textContent = '';
+        if (game.difficulty === 'Impossible'){screen.textContent = 'Yup. "Impossible"';}
         game.difficultyButton.addEventListener('click', game.chooseDifficultyHandle);
         game.sizeForm.addEventListener('submit', game.changeGridSizeClickHandle)
         game.difficultyButton.style.backgroundColor = buttonColor;

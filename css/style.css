@@ -80,7 +80,7 @@ body{
     width: 55%;
     padding: 8px;
     margin: 0;
-    background-color: #ffffff69;
+    background-color: #00000063;
 }
 
 .difficulty-container p:first-child{
@@ -239,7 +239,7 @@ body{
     background-color: #6d071a;
 }
 .start-button-impossible {
-    background-color: #333333;
+    background-color: #4e4e4e;
 }
 
 #start-button:hover {
@@ -401,13 +401,6 @@ body{
     animation: bonus 1s linear;
 }
 
-.cell-missclick {
-    text-align: center;
-    font-size: 1rem;
-    border: 0.3rem inset;
-    font-weight: bold;
-    animation: missclick 0.7s;
-}
 
 .cell-easy {
     background: linear-gradient(-200deg, #53cf63, #137911);
@@ -467,30 +460,38 @@ body{
         background: linear-gradient(360deg, gold, goldenrod);
         border: 0.3rem outset #747474;
     }
-  }
+}
 
-  @keyframes valid {
-      10%{
-          border:0.3rem outset white;
-          background: #006d6d;
-      }
-  }
-
-  @keyframes bonus {
+@keyframes valid {
     0%{
-          text-shadow: #ffcd50 0 0 0;
+        border: 0.3rem #006e32 inset;
+        background:#006e32 ;
     }
     50%{
-          text-shadow: #ffcd50 0 0 10px;
-          color: #daa52000;
+        border: 0.3rem #1db69c inset;
+        background: #1db69c;
+    }
+    100%{
+        border: 0.3rem #006e32 inset;
+        background: #006e32;
+    }
+}
+
+@keyframes bonus {
+    0%{
+        text-shadow: #ffcd50 0 0 0;
+    }
+    50%{
+        text-shadow: #ffcd50 0 0 10px;
+        color: #daa52000;
     }
     100%{
         text-shadow: #ffcd50 0 0 30px;
         color: #daa52000;
     }
-  }
+}
 
-  @keyframes missclick {
+@keyframes missclick {
     0%{
         border: 0.3rem orange inset;
         background:orange ;
@@ -503,15 +504,15 @@ body{
         border: 0.3rem orange inset;
         background: orange;
     }
-
-  }
+    
+}
 
 
 #options {
     margin: auto;
     padding: 0 8px 8px;
     width: 55%;
-    background: rgba(255, 255, 255, 0.233);
+    background: #00000063;
     backdrop-filter: blur(10px);
     position: absolute;
     top:2.5rem;
@@ -535,19 +536,19 @@ body{
 }
 
 .dif-easy {
-    color:  green;
+    color:  #53cf63;
 }
 .dif-medium {
-    color: blue;
+    color: #4095e4;
 }
 .dif-hard {
-    color: purple;
+    color: #a77deb;
 }
 .dif-extreme {
-    color: #6d071a;
+    color: #883242;
 }
 .dif-impossible {
-    color: black;
+    color: #737373;
 }
 
 /* cells */
@@ -559,10 +560,19 @@ body{
     animation: valid 0.5s linear ;
 }
 
+.cell-missclick {
+    text-align: center;
+    font-size: 1rem;
+    border: 0.3rem inset;
+    font-weight: bold;
+    animation: missclick 0.7s;
+}
+
 .overlay {
     background-image: url('../image/crack.png');
     background-size: cover ;
     overflow: hidden;
+    position: absolute;
     background-repeat: no-repeat;
     box-sizing: border-box;
     height:100%;
