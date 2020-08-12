@@ -29,7 +29,7 @@ body{
 }
 
 .container-extreme{
-    background: linear-gradient(-90deg, #b52222,#eb977d,#b52222);
+    background: linear-gradient(-90deg, #6d071a,#883242,#6d071a);
 }
 
 .container-impossible{
@@ -62,7 +62,7 @@ body{
     background: linear-gradient(90deg, #5a22b5,#a77deb );
 }
 .infos-extreme{
-    background: linear-gradient(90deg, #b52222,#eb977d );
+    background: linear-gradient(90deg, #6d071a,#883242 );
 }
 .infos-impossible{
     background: linear-gradient(90deg, #4e4e4e,#adadad);
@@ -102,7 +102,7 @@ body{
     background-color: #6e0101;
 }
 .difficulty-container-extreme {
-    background-color: #b52222;
+    background-color: #6d071a;
 }
 .difficulty-container-impossible {
     background-color: #333333;
@@ -236,7 +236,7 @@ body{
     background-color: #42016e;
 }
 .start-button-extreme {
-    background-color: #b52222;
+    background-color: #6d071a;
 }
 .start-button-impossible {
     background-color: #333333;
@@ -270,7 +270,7 @@ body{
     background: linear-gradient(-90deg, #5a22b5,#a77deb);
 }
 .scores-extreme {
-    background: linear-gradient(-90deg, #b52222,#eb977d);
+    background: linear-gradient(-90deg, #6d071a,#883242);
 }
 .scores-impossible {
     background: linear-gradient(-90deg, #4e4e4e,#adadad);
@@ -422,8 +422,8 @@ body{
     border: 0.3rem outset #c8b0de;
 }
 .cell-extreme {
-    background: linear-gradient(-200deg, #eb977d, #b52222);
-    border: 0.3rem outset #f39c81;
+    background: linear-gradient(-200deg, #883242, #6d071a);
+    border: 0.3rem outset #b3838c;
 }
 .cell-impossible {
     background: linear-gradient(-200deg, #cac9c9, #464646);
@@ -506,15 +506,6 @@ body{
 
   }
 
-  @keyframes alert-extreme {
-      0%{
-    }
-      50%{
-          
-    }
-      100%{
-    }
-  }
 
 #options {
     margin: auto;
@@ -553,7 +544,7 @@ body{
     color: purple;
 }
 .dif-extreme {
-    color: brown;
+    color: #6d071a;
 }
 .dif-impossible {
     color: black;
