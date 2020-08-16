@@ -33,7 +33,7 @@
 
 // saveScore($scoreInfos, $scoreDifficulty, $scores);
 
-header('Location: ../html/index.html');
+header('Location: ../index.html');
 var_dump($username);
 var_dump($score);
 var_dump($scoreDifficulty);

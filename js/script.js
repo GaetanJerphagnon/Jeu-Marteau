@@ -480,9 +480,9 @@ let game = {
         button.addEventListener('click', game.startGame);
 
         // End game score form display
-        game.displayEndScore();
-        document.getElementById("end-game-form").addEventListener("submit", game.submitEndScoreHandle);
-        document.getElementById("end-game-close").addEventListener('click', game.closeEndScore);
+        //game.displayEndScore();
+        //document.getElementById("end-game-form").addEventListener("submit", game.submitEndScoreHandle);
+        //document.getElementById("end-game-close").addEventListener('click', game.closeEndScore);
     },
     
     clickOutside: function(event){
