@@ -1,24 +1,28 @@
+* {
+    font-family: 'Russo One', sans-serif;
+}
 
 body{
     background-color: black;
+    position: relative;
     text-shadow: #464646 0 0 10px;
     user-select: none;
+    cursor: url('../image/pointer.png') 0 0, default ;
 }
 #container {
-    width: 90rem;
+    width: 100rem;
     margin: auto;
     border: 2px black solid;
     border-radius: 10px;
+    padding: 1%;
     position: relative;
-    padding: 1rem;
     display: flex;
     flex-direction: row;
-    font-family: 'Russo One', sans-serif;
     color: white;
 }
 
 .container-easy{
-    background: linear-gradient(-90deg, #137911,#53cf63,#137911);
+    background: linear-gradient(-90deg, #0d520c,#27a027,#0d520c);
 }
 
 .container-medium{
@@ -54,7 +58,7 @@ body{
 }
 
 .infos-easy{
-    background: linear-gradient(90deg, #137911,#53cf63);
+    background: linear-gradient(90deg, #0d520c,#27a027);
 }
 .infos-medium{
     background: linear-gradient(90deg, #275ca0,#73a3d0);
@@ -94,7 +98,7 @@ body{
 }
 
 .difficulty-container-easy {
-    background-color: #004705;
+    background-color: #0d520c;
 }
 .difficulty-container-medium {
     background-color: #01236e;
@@ -120,7 +124,6 @@ body{
 }
 
 #difficulty-choice:hover {
-    cursor: pointer;
     box-shadow: white 0 -5px 30px;
 }
 
@@ -144,7 +147,6 @@ body{
 }
 
 .secret-option {
-    font-family: 'Russo One', sans-serif;
     color: black;
     font-size: 0.8rem;
     border-radius: 20px;
@@ -171,21 +173,22 @@ body{
 
 .screen-container i {
     font-size: 12.5rem;
-    width: 100%;
+    width: 90%;
 }
 
 .screen {
     background-color: black;
     border-radius: 10px;
     position: absolute;
-    width:91%;
-    height: 62%;
-    top: 15px;
+    width:90%;
+    height: 70%;
+    top: 5px;
     left: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 #myProgress {
@@ -207,7 +210,7 @@ body{
 .secret-options-display-container {
     width: 100%;
     position: absolute;
-    top: 10px;
+    top: 0;
     display: flex;
     justify-content: space-around;
     flex-direction: row;
@@ -229,7 +232,7 @@ body{
 }
 
 #start-button {
-    font-family: 'Russo One', sans-serif;
+    cursor: url('../image/pointer.png') 0 0, default ;
     color: white;
     font-size: 1.3rem;
     border-radius: 20px;
@@ -240,7 +243,7 @@ body{
     transition: 0.2s;
 }
 .start-button-easy {
-    background-color: #004705;
+    background-color: #0d520c;
 }
 .start-button-medium {
     background-color: #01236e;
@@ -257,7 +260,6 @@ body{
 
 #start-button:hover {
     box-shadow: white 0 0 30px;
-    cursor: pointer;
 }
 
 #scores-container {
@@ -325,7 +327,7 @@ body{
 }
 
 .scores-easy {
-    background: linear-gradient(-90deg, #137911,#53cf63);
+    background: linear-gradient(-90deg, #0d520c,#27a027);
 }
 .scores-medium {
     background: linear-gradient(-90deg, #275ca0,#73a3d0);
@@ -369,13 +371,11 @@ body{
 }
 
 .top-scores {
-    font-family: 'Russo One', sans-serif;
     border-radius: 35px;
     background-color: rgba(255, 255, 255, 0.11);
     font-size: 1.2rem;
     width: 75%;
     overflow: hidden;
-    text-align: right;
     border: 1px solid grey;
     height: 25rem;
     margin: auto;
@@ -383,8 +383,8 @@ body{
 }
 
 .top-scores p {
-    padding: 0.2rem 30px;
-    margin: auto;
+    margin: 5px auto;
+    padding: 0 10px;
     height: 1rem;
     display: flex;
     flex-direction: row;
@@ -394,6 +394,10 @@ body{
 .top-scores p:first-child {
     text-align: center;
     display: block;
+}
+
+.hidden {
+    display: none;
 }
 
 .police-band {
@@ -420,6 +424,7 @@ body{
 }
 
 #grid-container {
+    cursor: url('../image/viseur.png') 22 22, default ;
     background-color: lightgrey;
     border-radius: 40px;
     width: 47rem;
@@ -430,6 +435,10 @@ body{
     justify-content: center;
     align-items: center;
     border: 6px #aaaaaa groove;
+}
+
+#grid-container:active {
+    cursor: url('../image/viseur-actif.png') 22 22, default ;
 }
 
 .grid {
@@ -468,7 +477,7 @@ body{
 
 
 .cell-easy {
-    background: linear-gradient(-200deg, #53cf63, #137911);
+    background: linear-gradient(-200deg, #27a027, #0d520c);
     border: 0.3rem outset #a1be99;
 }
 .cell-medium {
@@ -498,7 +507,7 @@ body{
 
 /**=========================Useful for scripts====================**/
 
-@keyframes blinker {
+@keyframes blinker-bonus {
     from{
         background: linear-gradient(0deg, gold, goldenrod);
         border: 0.3rem outset #747474;
@@ -523,6 +532,35 @@ body{
         background: linear-gradient(324deg, gold, goldenrod);
     }to{
         background: linear-gradient(360deg, gold, goldenrod);
+        border: 0.3rem outset #747474;
+    }
+}
+
+@keyframes blinker {
+    from{
+        background: linear-gradient(0deg, #ffffff, #5c5c5c);
+        border: 0.3rem outset #747474;
+    }
+    10%{
+        background: linear-gradient(36deg, #ffffff, #5c5c5c);
+    }20%{
+        background: linear-gradient(72deg, #ffffff, #5c5c5c);
+    }30%{
+        background: linear-gradient(108deg, #ffffff, #5c5c5c);
+    }40%{
+        background: linear-gradient(144deg, #ffffff, #5c5c5c);
+    }50%{
+        background: linear-gradient(180deg, #ffffff, #5c5c5c);
+    }60%{
+        background: linear-gradient(216deg, #ffffff, #5c5c5c);
+    }70% {
+        background: linear-gradient(252deg, #ffffff, #5c5c5c);
+    }80%{
+        background: linear-gradient(288deg, #ffffff, #5c5c5c);
+    }90%{
+        background: linear-gradient(324deg, #ffffff, #5c5c5c);
+    }to{
+        background: linear-gradient(360deg, #ffffff, #5c5c5c);
         border: 0.3rem outset #747474;
     }
 }
@@ -578,6 +616,87 @@ body{
     }
 }
 
+#end-game-container {
+    position: absolute;
+    top: 80%;
+    left: 80%;
+    width:20%;
+    height: 20%;
+    display: none;    
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-size: 0.9rem;
+    z-index: 10;
+}
+
+
+#end-game {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 2%;
+    background-color: #000000bd;
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: 100%;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    transition: 0.5s;
+    top:100%;
+    z-index: 10;
+}
+
+
+#end-game-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+#end-game-form {
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#end-game-form-error {
+    position: absolute;
+    bottom: 0.7rem;
+    right: 1rem;
+    height: 1em;
+    font-size: 0.7rem;
+    color: red;
+}
+
+#end-game-button {
+    width: 25%;
+    padding: 0.3rem 0.5rem;
+    margin: 0.5rem;
+    color: white;
+    border: 1px solid white;
+    background-color: black;
+    transition: 0.5s;
+    border-radius: 20px;
+}
+
+#end-game-button:hover{
+    box-shadow: white 0 0 20px;
+}
+
+#username {
+    color: white;
+    width: 12ch;
+    border-radius: 10px;
+    padding: 0.3rem;
+    background-color: #222222c4;
+    border: white solid 1px
+}
 
 #options {
     margin: auto;
@@ -587,7 +706,7 @@ body{
     backdrop-filter: blur(10px);
     position: absolute;
     top:2.5rem;
-    border: 1px solid black;
+    border: 1px solid #141414;
     border-top: none;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -598,7 +717,6 @@ body{
     list-style-type: none;
     margin: auto;
     padding: 2px 0;
-    cursor: pointer;
     transition: 0.2s;
 }
 
@@ -607,7 +725,7 @@ body{
 }
 
 .dif-easy {
-    color:  #53cf63;
+    color:  #1cad1a;
 }
 .dif-medium {
     color: #4095e4;
@@ -626,6 +744,9 @@ body{
 
 .target {
     animation: blinker 0.2s linear infinite;
+}
+.target-bonus {
+    animation: blinker-bonus 0.2s linear infinite;
 }
 .target-valid {
     animation: valid 0.5s linear ;

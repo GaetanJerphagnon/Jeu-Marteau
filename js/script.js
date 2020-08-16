@@ -3,11 +3,11 @@ let game = {
     
     difficulty : "Medium",
     difficulties : {
-        "Easy": {"time" : 2000, "basePoints" : 10},
-        "Medium": {"time": 1100, "basePoints" : 35},
-        "Hard": {"time": 700, "basePoints" : 60},
-        "Extreme": {"time": 470, "basePoints" : 100},
-        "Impossible": {"time": 50, "basePoints" : 1},
+        "Easy": {"time" : 2000, "basePoints" : 10, "color" : "green"},
+        "Medium": {"time": 1100, "basePoints" : 35, "color" : "blue"},
+        "Hard": {"time": 700, "basePoints" : 60, "color" : "purple"},
+        "Extreme": {"time": 470, "basePoints" : 100, "color" : "bordeaux"},
+        "Impossible": {"time": 50, "basePoints" : 1, "color" : "black"},
     },
     bonusCountdown: 0,
     bonusPoint: 1,
@@ -17,7 +17,7 @@ let game = {
     sizeForm : document.getElementById("size-container"),
     occurenceForm : document.getElementById("occurence-container"),
     difficultyButton : document.getElementById('difficulty-choice'),
-    occurence: 5,
+    occurence: null,
     pointCounter : 0,
     secretDiscovered: false,
     broken : false,
@@ -57,7 +57,7 @@ let game = {
         input.value = '';
         await sleep(1000);
         input.style.border ='';
-        input.setAttribute('placeholder', '1> ... >20');
+        input.setAttribute('placeholder', '1...20');
         game.sizeForm.addEventListener('submit', game.changeGridSizeSubmitHandle);
     },
 
@@ -84,7 +84,7 @@ let game = {
             }
         }
         input.value = '';
-        input.setAttribute('placeholder', '1> ... >50');
+        input.setAttribute('placeholder', '1...50');
         game.sizeForm.addEventListener('submit', game.changeOccurenceSubmitHandle);
     },
     
@@ -254,14 +254,26 @@ let game = {
         
     },
     
-    getRandomCell: async function(){
+    getRandomCell: function(){
         let gridSize = game.grid.childElementCount;
-        let cellNumber = Math.floor((Math.random() * gridSize*gridSize) + 0);
-        let index = Math.floor(cellNumber/gridSize);
-        let cellIndex = cellNumber-index*gridSize;
-        let rowIndex = index+1 ;
-        let row = document.querySelector('.grid .row:nth-child('+rowIndex+')').childNodes;
-        let cell = row[cellIndex];
+        let cellNumber= null;
+        let index = null;
+        let cellIndex = null;
+        let rowIndex = null;
+        let row = null;
+        let cell = null;
+        do {
+            cellNumber = Math.floor((Math.random() * gridSize*gridSize) + 0);
+            index = Math.floor(cellNumber/gridSize);
+            cellIndex = cellNumber-index*gridSize;
+            rowIndex = index+1 ;
+            row = document.querySelector('.grid .row:nth-child('+rowIndex+')').childNodes;
+            cell = row[cellIndex];
+        } while (cell.classList.contains("target"))
+        return cell;
+    },
+    
+    addTargetProperties: async function(cell){
         cell.classList.add("target");
         cell.removeEventListener('mousedown', game.missclickHandle);
         cell.addEventListener('mousedown', game.cellClickHandle)
@@ -272,7 +284,24 @@ let game = {
         cell.classList.remove("target-valid");
         if (game.difficulty == "Impossible") {
             cell.classList.add("target-impossible");
-        }
+        } 
+    },
+
+    addBonusTargetProperties: async function(cell){
+        cell.classList.add("target-bonus");
+        cell.removeEventListener('mousedown', game.missclickHandle);
+        cell.addEventListener('mousedown', game.cellClickHandle);
+        setTimeout(function(){
+            cell.removeEventListener('mousedown', game.cellClickHandle);
+            cell.addEventListener('mousedown', game.missclickHandle);
+            cell.classList.remove("target-bonus");
+            cell.classList.remove("target-valid");
+
+        }, game.difficulties[game.difficulty]["time"]*0.75);
+
+        if (game.difficulty == "Impossible") {
+            cell.classList.add("target-impossible");
+        } 
     },
     
     addPoints: function (points){
@@ -284,7 +313,12 @@ let game = {
     
     cellClickHandle: async function (event){
         let target = event.currentTarget;
+        let targetBonusPoint = 0;
+        if(target.classList.contains("target-bonus")){
+            targetBonusPoint = game.difficulties[game.difficulty]['basePoints']*2;
+        }
         target.classList.remove("target");
+        target.classList.remove("target-bonus");
         target.removeEventListener('mousedown', game.cellClickHandle);
         target.classList.add("target-valid");
         if (game.bonusCountdown > Date.now()){
@@ -313,7 +347,7 @@ let game = {
             }, 1000);
         }
         game.bonusCountdown = Date.now()+1.9*game.difficulties[game.difficulty]["time"];
-        game.addPoints(game.difficulties[game.difficulty]['basePoints']+game.bonusPoint);
+        game.addPoints(game.difficulties[game.difficulty]['basePoints']+game.bonusPoint+targetBonusPoint);
         if (target.classList.contains("target-impossible")){
             let targetOverlay = document.createElement("div");
             let container = document.getElementById('container');
@@ -360,9 +394,47 @@ let game = {
 
     },
 
+    displayEndScore: function() {
+        let endGameContainer = document.getElementById("end-game-container");
+        endGameContainer.style.display = "block";
+        let endGame = document.getElementById("end-game");
+        setTimeout(function(){endGame.style.top = "0"}, 100);
+    },
+
+    closeEndScore: function(event) {
+        let endGameContainer = document.getElementById("end-game-container");
+        let endGame = document.getElementById("end-game");
+        endGame.style.top ="100%";
+        setTimeout(function(){endGameContainer.style.display = "none"}, 500);
+    },
+
+    submitEndScoreHandle: function(e) {
+        e.preventDefault();
+        let userName = document.getElementById("username").value;
+
+        let error = document.getElementById("end-game-form-error");
+        if (userName.length == 0) {
+            error.textContent = "I need a name."
+        } else if (10 < userName.length) {
+            error.textContent = "Your name's too long";
+        } else if (userName.length <= 2){
+            error.textContent ="Your name's too short";
+        } else {
+            setTimeout(function(){ error.textContent="" },1500);
+            let currentScore = document.getElementById("score-display");
+            let scoreToSave = document.getElementById("score-data");
+            document.getElementById("score-difficulty").value = game.difficulty;
+            scoreToSave.value=currentScore.textContent;
+
+            e.currentTarget.submit();
+        } // Add score in an array and username in session too
+        
+    },
+
     startGame: async function(event){
         game.pointCounter = 0;
         game.addPoints(0);
+        game.closeEndScore();
         let allCells = document.getElementsByClassName('cell');
         for(let i=0 ; i<allCells.length; i++){
             allCells[i].addEventListener("mousedown", game.missclickHandle);
@@ -376,17 +448,24 @@ let game = {
         button.style.backgroundColor ="grey";
         
         let screen = document.querySelector('.screen p');
-        screen.textContent ='Game starting...';
+        screen.textContent ='Get ready...';
         progress(game.difficulties[game.difficulty]["time"]/100);
-        await sleep(game.difficulties[game.difficulty]["time"]*1.1);
+        await sleep(game.difficulties[game.difficulty]["time"]);
         screen.textContent ='Game in progress...';
-        
+
+        let bonusTimer = Math.floor((Math.random() *game.occurence*game.difficulties[game.difficulty]["time"]) + 0)
+        setTimeout(function(){
+            game.addBonusTargetProperties(game.getRandomCell());
+        }, bonusTimer);
         for (let i=0; i<game.occurence ; i++) {
             if(game.broken == false){
-                game.getRandomCell();
+                game.addTargetProperties(game.getRandomCell());
                 await sleep(game.difficulties[game.difficulty]["time"]);
             } else if (game.broken) {
-                return alert('You clicked too hard you broke my game!')
+                setTimeout(() => {
+                    alert('You clicked too hard you broke my game!')  
+                }, 20);
+                return;
             }
         }
         for(let i=0 ; i<allCells.length; i++){
@@ -399,6 +478,11 @@ let game = {
         game.difficultyButton.style.backgroundColor = buttonColor;
         button.style.backgroundColor = buttonColor;
         button.addEventListener('click', game.startGame);
+
+        // End game score form display
+        game.displayEndScore();
+        document.getElementById("end-game-form").addEventListener("submit", game.submitEndScoreHandle);
+        document.getElementById("end-game-close").addEventListener('click', game.closeEndScore);
     },
     
     clickOutside: function(event){
@@ -438,4 +522,5 @@ function progress(ms) {
         }
     }
 }
+
 game.init();

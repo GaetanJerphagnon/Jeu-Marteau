@@ -77,10 +77,8 @@
                 <div id="end-game-close">X</div>
                 <div id="end-game-suggestion">Looks like you are at the top</div>
                 <div id="end-game-question">Would you like to save your score?</div>
-                <form id="end-game-form" action="../php/addScore.php" method="POST" class="end-game-form">
+                <form id="end-game-form" action="" method="POST" class="end-game-form">
                     <div><label for="username">Your name  </label><input type="text" id="username" name="username" placeholder="10 chars max"></div>
-                    <input id="score-data" class="hidden" type="int" name="score">
-                    <input id="score-difficulty" class="hidden" type="text" name="score-difficulty">
                     <div id="end-game-form-error"> </div>
                     <button id="end-game-button" type="submit">Save!</button>
                 </form>
