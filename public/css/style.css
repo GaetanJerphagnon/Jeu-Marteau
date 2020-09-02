@@ -384,16 +384,28 @@ body{
 
 .top-scores p {
     margin: 5px auto;
-    padding: 0 10px;
-    height: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    width: max-content;
+    padding: 0;
+    height: 1.2rem;
+    display: block;
 }
 
 .top-scores p:first-child {
     text-align: center;
     display: block;
+}
+
+table {
+    width: 97%;
+}
+
+th {
+    font-weight: normal;
+}
+
+tr th:nth-child(3){
+    text-align: right;
+    margin-right: 5px;
 }
 
 .hidden {

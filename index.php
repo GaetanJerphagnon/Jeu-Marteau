@@ -1,13 +1,21 @@
+<?php
+
+require 'php/pdo.php';
+
+$allScores = $pdo->query(QuerySelectAllScores())->fetchAll(PDO::FETCH_ASSOC);
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="public/css/reset.css">
+    <link rel="stylesheet" href="public/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
     <title>Hammer Game</title>
-    <link rel="icon" href="image/viseur.png">
+    <link rel="icon" href="public/image/viseur.png">
     <script src="https://kit.fontawesome.com/fb034f5d7d.js" crossorigin="anonymous"></script>
 
 </head>
@@ -16,7 +24,7 @@
         <div class="infos">
             <div class="difficulty-container">
                 <p id="difficulty-choice"><span><i class="fas fa-chevron-right"></i></span> Difficulty</p>
-                <p id="difficulty-display" class="dif-medium">Medium</p>
+                <p id="difficulty-display" class=""></p>
 
             </div>
             <div class="screen-container">
@@ -65,9 +73,8 @@
                 <div class="top-scores">
                     <p>Top scores</p>
                     <hr>
-     
-                    <div class="police-band"> WIP WIP WIP WIP WIP WIP WIP WIP WIP</div>
-                    <div class="police-band police-band-reverse">WIP WIP WIP WIP WIP WIP</div>
+                    <table>
+                    </table>
 
                 </div>
             </div>
@@ -77,7 +84,7 @@
                 <div id="end-game-close">X</div>
                 <div id="end-game-suggestion">Looks like you are at the top</div>
                 <div id="end-game-question">Would you like to save your score?</div>
-                <form id="end-game-form" action="../php/addScore.php" method="POST" class="end-game-form">
+                <form id="end-game-form" action="php/add-score.php" method="POST" class="end-game-form">
                     <div><label for="username">Your name  </label><input type="text" id="username" name="username" placeholder="10 chars max"></div>
                     <input id="score-data" class="hidden" type="int" name="score">
                     <input id="score-difficulty" class="hidden" type="text" name="score-difficulty">
@@ -90,6 +97,9 @@
 
     
     
-    <script src='js/script.js' ></script>
+    <script> 
+    let allScores = <?php echo json_encode($allScores); ?>;
+    </script>
+    <script src='public/js/script.js' ></script>
 </body>
 </html>

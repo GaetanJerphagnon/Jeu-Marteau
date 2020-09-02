@@ -18,6 +18,7 @@ let game = {
     occurenceForm : document.getElementById("occurence-container"),
     difficultyButton : document.getElementById('difficulty-choice'),
     occurence: null,
+    gridSize: null,
     pointCounter : 0,
     secretDiscovered: false,
     broken : false,
@@ -93,6 +94,7 @@ let game = {
             game.grid.removeChild(game.grid.lastElementChild);
         };
         game.displayGridSize(number);
+        game.gridSize = number;
         game.generateCells(number);
     },
 
@@ -162,6 +164,7 @@ let game = {
             }
         }
         game.setColors();
+        game.changeScoreBoard(game.difficulty);
         display.textContent = game.difficulty;
         display.classList ="";
         display.classList.add('dif-'+game.difficulty.toLowerCase());
@@ -252,6 +255,39 @@ let game = {
         game.difficultyButton.addEventListener("click", game.chooseDifficultyHandle);
         document.removeEventListener("click", game.clickOutside);
         
+    },
+
+    changeScoreBoard: function(difficulty){
+        let scoreOfCurrentDifficulty = [];
+        let scoreBoard = document.querySelector("table");
+        while (scoreBoard.lastElementChild) {
+            scoreBoard.removeChild(scoreBoard.lastElementChild);
+        };
+        for(let i in allScores) {
+            if(allScores[i]['difficulty'] === difficulty){
+                scoreOfCurrentDifficulty.push([allScores[i]['playername'],allScores[i]['score']]);
+            }
+        }
+
+        for(let i = 0 ; scoreOfCurrentDifficulty.length>i ; i++) {
+            let scoreRow = document.createElement("tr");
+            let scoreRank = document.createElement("th");
+            let scorePlayer = document.createElement("th");
+            let score = document.createElement("th");
+            score.classList.add("top-scores-score");
+
+            scoreRank.textContent = i+1+".";
+            scorePlayer.textContent = scoreOfCurrentDifficulty[i][0];
+            score.textContent = scoreOfCurrentDifficulty[i][1];
+
+            scoreBoard.appendChild(scoreRow);
+            scoreRow.appendChild(scoreRank);
+            scoreRow.appendChild(scorePlayer);
+            scoreRow.appendChild(score);
+            console.log(scoreRow);
+        }
+        console.log(scoreOfCurrentDifficulty);
+
     },
     
     getRandomCell: function(){
@@ -421,13 +457,27 @@ let game = {
             error.textContent ="Your name's too short";
         } else {
             setTimeout(function(){ error.textContent="" },1500);
-            let currentScore = document.getElementById("score-display");
+            let currentScore = game.pointCounter;
             let scoreToSave = document.getElementById("score-data");
+            let scoreDisplay = document.getElementById('score-display');
+            let screen = document.querySelector('.screen p');
+            console.log(document.getElementById("score-difficulty"));
+            console.log(game.difficulty);
             document.getElementById("score-difficulty").value = game.difficulty;
-            scoreToSave.value=currentScore.textContent;
+            scoreToSave.value=currentScore;
 
+            if(game.pointCounter != scoreDisplay.textContent){
+                //if user tried to change html value
+                document.getElementById("score-difficulty").value = 'cheat';
+            }
+            if(game.occurence != 15 || game.gridSize != 10){
+                document.getElementById("score-difficulty").value = 'secret';
+            }
+            //if secret commands are used
+            document 
             e.currentTarget.submit();
-        } // Add score in an array and username in session too
+
+        } 
         
     },
 
@@ -480,9 +530,9 @@ let game = {
         button.addEventListener('click', game.startGame);
 
         // End game score form display
-        //game.displayEndScore();
-        //document.getElementById("end-game-form").addEventListener("submit", game.submitEndScoreHandle);
-        //document.getElementById("end-game-close").addEventListener('click', game.closeEndScore);
+        game.displayEndScore();
+        document.getElementById("end-game-form").addEventListener("submit", game.submitEndScoreHandle);
+        document.getElementById("end-game-close").addEventListener('click', game.closeEndScore);
     },
     
     clickOutside: function(event){
@@ -522,5 +572,6 @@ function progress(ms) {
         }
     }
 }
+console.log(allScores);
 
 game.init();
