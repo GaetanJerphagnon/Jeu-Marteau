@@ -18,7 +18,7 @@ function QuerySelectAllScoresByDifficulty($difficulty, $playerName =""){
 }
 
 function QuerySselectAllCheaters(){
-    return "SELECT `playername` FROM scores WHERE difficulty = cheater ;";
+    return "SELECT `playername` FROM scores WHERE difficulty = 'cheater' ;";
 }
 
 function saveScore($playerName, $difficulty, $score) {

@@ -6,15 +6,11 @@
 if (strlen($username)>10 || strlen($username)<=0){
     throw new Error('Il y a eu une erreur, votre nom n\'est pas valide');
 }
-var_dump($username);
-var_dump($score);
-var_dump($scoreDifficulty);
 
 require 'pdo.php';
 
 
 $allScores = $pdo->query(QuerySelectAllScoresByDifficulty($scoreDifficulty, $username))->fetchAll(PDO::FETCH_ASSOC);
-var_dump($allScores);
 
 if ($scoreDifficulty !== 'secret'){
 
