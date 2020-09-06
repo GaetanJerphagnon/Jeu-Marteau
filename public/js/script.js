@@ -285,6 +285,10 @@ let game = {
             scoreRow.appendChild(scorePlayer);
             scoreRow.appendChild(score);
             console.log(scoreRow);
+            //above 12 rows overflow
+            if (i == 12){
+            break;
+            }
         }
         console.log(scoreOfCurrentDifficulty);
 

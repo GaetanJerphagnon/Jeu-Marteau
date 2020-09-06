@@ -294,11 +294,12 @@ body{
     right: 5px;
     font-size: 0.5rem;
     text-shadow: none;
-    color: #ffffff08;
+    background-image: url('https://img.icons8.com/ultraviolet/80/000000/triforce.png');
+    filter: opacity(15%);
 }
 
 .secret-active {
-    animation: secret-blink 0.5s linear infinite;
+    animation: secret-blink 1s linear infinite;
 }
 
 #secret-commands {
@@ -625,6 +626,7 @@ tr th:nth-child(3){
 @keyframes secret-blink {
     50%{
         background-image: url('https://img.icons8.com/ultraviolet/80/000000/triforce.png');
+        filter: opacity(100%);
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
 
- $pdo = new PDO('mysql:host=localhost;dbname=hammer;charset=UTF8', 'explorateur', 'Ereul9Aeng', array(
+ $pdo = new PDO('mysql:host=localhost;dbname=hammer;charset=UTF8', 'root', 'wow123', array(
     \PDO::ATTR_EMULATE_PREPARES => false,
     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
 ));
