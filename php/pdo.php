@@ -6,7 +6,7 @@
 ));
 
 function QuerySelectAllScores(){
-    return "SELECT * FROM scores ORDER BY `score` DESC, `date` ASC;";
+    return "SELECT * FROM scores ORDER BY `score` DESC, `date` DESC;";
 }
 
 function QuerySelectAllScoresByDifficulty($difficulty, $playerName =""){
