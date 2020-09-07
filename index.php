@@ -3,6 +3,7 @@
 require 'php/pdo.php';
 
 $allScores = $pdo->query(QuerySelectAllScores())->fetchAll(PDO::FETCH_ASSOC);
+var_dump($allScores);
 
 
 ?>
