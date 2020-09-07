@@ -3,7 +3,6 @@
 require 'php/pdo.php';
 
 $allScores = $pdo->query(QuerySelectAllScores())->fetchAll(PDO::FETCH_ASSOC);
-var_dump($allScores);
 
 
 ?>
@@ -99,7 +98,7 @@ var_dump($allScores);
     
     
     <script> 
-    let allScores = <?php json_encode($allScores); ?>;
+    let allScores = <?php  echo json_encode($allScores); ?>;
     </script>
     <script src='public/js/script.js' ></script>
 </body>
