@@ -98,7 +98,7 @@ $allScores = $pdo->query(QuerySelectAllScores())->fetchAll(PDO::FETCH_ASSOC);
     
     
     <script> 
-    let allScores = <?php json_encode($allScores) ?>:
+    let allScores = <?php json_encode($allScores); ?>;
     </script>
     <script src='public/js/script.js' ></script>
 </body>

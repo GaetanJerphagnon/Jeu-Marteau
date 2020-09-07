@@ -284,11 +284,14 @@ let game = {
             scoreRow.appendChild(scoreRank);
             scoreRow.appendChild(scorePlayer);
             scoreRow.appendChild(score);
+            console.log(scoreRow);
             //above 12 rows overflow
             if (i == 12){
             break;
             }
         }
+        console.log(scoreOfCurrentDifficulty);
+
     },
     
     getRandomCell: function(){
@@ -462,6 +465,8 @@ let game = {
             let scoreToSave = document.getElementById("score-data");
             let scoreDisplay = document.getElementById('score-display');
             let screen = document.querySelector('.screen p');
+            console.log(document.getElementById("score-difficulty"));
+            console.log(game.difficulty);
             document.getElementById("score-difficulty").value = game.difficulty;
             scoreToSave.value=currentScore;
 
