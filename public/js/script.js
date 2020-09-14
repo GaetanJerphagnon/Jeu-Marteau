@@ -90,6 +90,11 @@ let game = {
     },
     
     changeGridSize: function (number = 10){
+        if(number!=10){
+            game.secretDiscovered = true;
+        } else {
+            game.secretDiscovered = false;
+        };
         while (game.grid.lastElementChild) {
             game.grid.removeChild(game.grid.lastElementChild);
         };
@@ -99,6 +104,11 @@ let game = {
     },
 
     changeOcurrence: function(number = 15) {
+        if(number!=15){
+            game.secretDiscovered = true;
+        } else {
+            game.secretDiscovered = false;
+        };
         game.occurence = number;
         game.displayOccurence();
 
@@ -117,6 +127,10 @@ let game = {
     secretClickHandle: function(event) {
         let scores = document.querySelector(".scores");
         if (scores.classList.contains("move-score-panel-down")) {
+            scores.classList.toggle("transition");
+            setTimeout(function(){
+                scores.classList.toggle("transition");
+                },1000);
             game.moveScorePanelUp();
         } else {
             if (game.secretDiscovered===false){
@@ -125,6 +139,10 @@ let game = {
                 audio.play();
                 game.secretDiscovered = true;
             }
+            scores.classList.toggle("transition");
+            setTimeout(function(){
+                scores.classList.toggle("transition");
+                },1000);
             game.moveScorePanelDown();
         }
     },
@@ -502,11 +520,12 @@ let game = {
         progress(game.difficulties[game.difficulty]["time"]/100);
         await sleep(game.difficulties[game.difficulty]["time"]);
         screen.textContent ='Game in progress...';
-
-        let bonusTimer = Math.floor((Math.random() *game.occurence*game.difficulties[game.difficulty]["time"]) + 0)
-        setTimeout(function(){
-            game.addBonusTargetProperties(game.getRandomCell());
-        }, bonusTimer);
+        if(game.gridSize != 1){
+            let bonusTimer = Math.floor((Math.random() *game.occurence*game.difficulties[game.difficulty]["time"]) + 0)
+            setTimeout(function(){
+                game.addBonusTargetProperties(game.getRandomCell());
+            }, bonusTimer);
+        }
         for (let i=0; i<game.occurence ; i++) {
             if(game.broken == false){
                 game.addTargetProperties(game.getRandomCell());
