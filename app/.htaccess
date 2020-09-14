@@ -1,0 +1,2 @@
+# on interdit l'accès à ce dossier pour les navigateurs
+deny from all

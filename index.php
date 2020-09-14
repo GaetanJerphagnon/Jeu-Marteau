@@ -1,6 +1,6 @@
 <?php
 
-require 'php/pdo.php';
+require 'app/Utils/pdo.php';
 
 $allScores = $pdo->query(QuerySelectAllScores())->fetchAll(PDO::FETCH_ASSOC);
 
@@ -28,7 +28,6 @@ $allScores = $pdo->query(QuerySelectAllScores())->fetchAll(PDO::FETCH_ASSOC);
 
             </div>
             <div class="screen-container">
-                <i class="fas fa-tv"></i>
                 <div class="screen">
                     <p>
                         <div id="myProgress">
@@ -82,9 +81,9 @@ $allScores = $pdo->query(QuerySelectAllScores())->fetchAll(PDO::FETCH_ASSOC);
         <div id="end-game-container">
             <div id="end-game">
                 <div id="end-game-close">X</div>
-                <div id="end-game-suggestion">Looks like you are at the top</div>
+                <div id="end-game-suggestion" hidden>Looks like you are at the top</div>
                 <div id="end-game-question">Would you like to save your score?</div>
-                <form id="end-game-form" action="php/add-score.php" method="POST" class="end-game-form">
+                <form id="end-game-form" action="app/Utils/add-score.php" method="POST" class="end-game-form">
                     <div><label for="username">Your name  </label><input type="text" id="username" name="username" placeholder="10 chars max"></div>
                     <input id="score-data" class="hidden" type="int" name="score">
                     <input id="score-difficulty" class="hidden" type="text" name="score-difficulty">

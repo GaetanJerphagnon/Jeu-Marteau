@@ -1,6 +1,10 @@
 <?php
 
- $pdo = new PDO('mysql:host=localhost;dbname=hammer;charset=UTF8', 'root', 'wow123', array(
+$configData = parse_ini_file(__DIR__.'/../config.ini');
+
+$pdo = new PDO("mysql:host={$configData['DB_HOST']};dbname={$configData['DB_NAME']};charset=utf8",
+    $configData['DB_USERNAME'],
+    $configData['DB_PASSWORD'], array(
     \PDO::ATTR_EMULATE_PREPARES => false,
     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
 ));
